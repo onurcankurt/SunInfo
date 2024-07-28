@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		77B4C5492C56C52D001A8076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C5482C56C52D001A8076 /* AppDelegate.swift */; };
 		77B4C54B2C56C52D001A8076 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C54A2C56C52D001A8076 /* SceneDelegate.swift */; };
-		77B4C54D2C56C52D001A8076 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C54C2C56C52D001A8076 /* ViewController.swift */; };
+		77B4C54D2C56C52D001A8076 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C54C2C56C52D001A8076 /* HomePage.swift */; };
 		77B4C5502C56C52D001A8076 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 77B4C54F2C56C52D001A8076 /* Base */; };
 		77B4C5522C56C52E001A8076 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77B4C5512C56C52E001A8076 /* Assets.xcassets */; };
 		77B4C5552C56C52E001A8076 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 77B4C5542C56C52E001A8076 /* Base */; };
+		77B4C55D2C56C95F001A8076 /* SunInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C55C2C56C95F001A8076 /* SunInfoResponse.swift */; };
+		77B4C55F2C56C977001A8076 /* SunResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C55E2C56C977001A8076 /* SunResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		77B4C5452C56C52D001A8076 /* SunInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B4C5482C56C52D001A8076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77B4C54A2C56C52D001A8076 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		77B4C54C2C56C52D001A8076 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		77B4C54C2C56C52D001A8076 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		77B4C54F2C56C52D001A8076 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77B4C5512C56C52E001A8076 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77B4C5542C56C52E001A8076 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77B4C5562C56C52E001A8076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77B4C55C2C56C95F001A8076 /* SunInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunInfoResponse.swift; sourceTree = "<group>"; };
+		77B4C55E2C56C977001A8076 /* SunResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				77B4C5482C56C52D001A8076 /* AppDelegate.swift */,
 				77B4C54A2C56C52D001A8076 /* SceneDelegate.swift */,
-				77B4C54C2C56C52D001A8076 /* ViewController.swift */,
+				77B4C54C2C56C52D001A8076 /* HomePage.swift */,
+				77B4C55C2C56C95F001A8076 /* SunInfoResponse.swift */,
+				77B4C55E2C56C977001A8076 /* SunResults.swift */,
 				77B4C54E2C56C52D001A8076 /* Main.storyboard */,
 				77B4C5512C56C52E001A8076 /* Assets.xcassets */,
 				77B4C5532C56C52E001A8076 /* LaunchScreen.storyboard */,
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77B4C54D2C56C52D001A8076 /* ViewController.swift in Sources */,
+				77B4C54D2C56C52D001A8076 /* HomePage.swift in Sources */,
+				77B4C55F2C56C977001A8076 /* SunResults.swift in Sources */,
+				77B4C55D2C56C95F001A8076 /* SunInfoResponse.swift in Sources */,
 				77B4C5492C56C52D001A8076 /* AppDelegate.swift in Sources */,
 				77B4C54B2C56C52D001A8076 /* SceneDelegate.swift in Sources */,
 			);
