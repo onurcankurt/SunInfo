@@ -8,19 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home Page-->
+        <!--Home PageVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomePage" customModule="SunInfo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomePageVC" customModule="SunInfo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="HSA-xc-cnY">
-                                <rect key="frame" x="57" y="103" width="265" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="UfJ-Fd-7K5"/>
-                                </constraints>
+                                <rect key="frame" x="202" y="103" width="134" height="34.333333333333343"/>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                     <!--1970-01-01 11:00:00 +0000-->
                                 </date>
@@ -99,17 +96,26 @@
                                     <action selector="getInfoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fQl-QH-xLn"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnv-Fm-juf">
+                                <rect key="frame" x="75" y="108" width="50.333333333333343" height="24.333333333333343"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9LN-aN-Df3" firstAttribute="top" secondItem="4dB-be-LPp" secondAttribute="bottom" constant="36.329999999999998" id="FGu-gV-JVH"/>
-                            <constraint firstItem="4dB-be-LPp" firstAttribute="top" secondItem="HSA-xc-cnY" secondAttribute="bottom" constant="74.333333333333314" id="Uyr-j4-bq3"/>
                             <constraint firstItem="4dB-be-LPp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WSq-ao-8oE"/>
+                            <constraint firstItem="HSA-xc-cnY" firstAttribute="centerY" secondItem="pnv-Fm-juf" secondAttribute="centerY" id="ZMw-zP-yvK"/>
+                            <constraint firstItem="HSA-xc-cnY" firstAttribute="leading" secondItem="pnv-Fm-juf" secondAttribute="trailing" constant="76.666666666666657" id="ady-14-0iN"/>
                             <constraint firstItem="9LN-aN-Df3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHt-sp-FKd"/>
-                            <constraint firstItem="HSA-xc-cnY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hkG-ez-fBc"/>
-                            <constraint firstItem="HSA-xc-cnY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="jb1-Sd-92i"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HSA-xc-cnY" secondAttribute="trailing" constant="71" id="nIF-jB-qpw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HSA-xc-cnY" secondAttribute="trailing" constant="57" id="onP-vf-5k1"/>
+                            <constraint firstItem="pnv-Fm-juf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="paW-Lm-Tgi"/>
+                            <constraint firstItem="4dB-be-LPp" firstAttribute="top" secondItem="HSA-xc-cnY" secondAttribute="bottom" constant="74.000000000000028" id="pet-PV-kQP"/>
+                            <constraint firstItem="pnv-Fm-juf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="s0n-4i-iMo"/>
+                            <constraint firstItem="HSA-xc-cnY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tfs-Pn-xod"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ew1-WJ-Irv"/>

@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		777355822C57D01500DCCE13 /* SunDaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777355812C57D01500DCCE13 /* SunDaoRepository.swift */; };
+		777355852C57D05000DCCE13 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 777355842C57D05000DCCE13 /* RxSwift */; };
+		777355872C57D4A600DCCE13 /* HomePageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777355862C57D4A600DCCE13 /* HomePageVM.swift */; };
+		7773558F2C57DC8700DCCE13 /* WorldTimeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773558E2C57DC8700DCCE13 /* WorldTimeAPI.swift */; };
 		77B4C5492C56C52D001A8076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C5482C56C52D001A8076 /* AppDelegate.swift */; };
 		77B4C54B2C56C52D001A8076 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C54A2C56C52D001A8076 /* SceneDelegate.swift */; };
-		77B4C54D2C56C52D001A8076 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C54C2C56C52D001A8076 /* HomePage.swift */; };
+		77B4C54D2C56C52D001A8076 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B4C54C2C56C52D001A8076 /* HomePageVC.swift */; };
 		77B4C5502C56C52D001A8076 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 77B4C54F2C56C52D001A8076 /* Base */; };
 		77B4C5522C56C52E001A8076 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77B4C5512C56C52E001A8076 /* Assets.xcassets */; };
 		77B4C5552C56C52E001A8076 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 77B4C5542C56C52E001A8076 /* Base */; };
@@ -19,10 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		777355812C57D01500DCCE13 /* SunDaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunDaoRepository.swift; sourceTree = "<group>"; };
+		777355862C57D4A600DCCE13 /* HomePageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVM.swift; sourceTree = "<group>"; };
+		7773558E2C57DC8700DCCE13 /* WorldTimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeAPI.swift; sourceTree = "<group>"; };
 		77B4C5452C56C52D001A8076 /* SunInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B4C5482C56C52D001A8076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77B4C54A2C56C52D001A8076 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		77B4C54C2C56C52D001A8076 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		77B4C54C2C56C52D001A8076 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
 		77B4C54F2C56C52D001A8076 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77B4C5512C56C52E001A8076 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77B4C5542C56C52E001A8076 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				777355852C57D05000DCCE13 /* RxSwift in Frameworks */,
 				77B4C5622C56CB70001A8076 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,6 +51,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		777355882C57D69100DCCE13 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				7773558B2C57D6A500DCCE13 /* repo */,
+				7773558A2C57D6A100DCCE13 /* entity */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		777355892C57D69800DCCE13 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				7773558D2C57D6C400DCCE13 /* viewmodels */,
+				7773558C2C57D6BF00DCCE13 /* views */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		7773558A2C57D6A100DCCE13 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				77B4C55C2C56C95F001A8076 /* SunInfoResponse.swift */,
+				77B4C55E2C56C977001A8076 /* SunResults.swift */,
+				7773558E2C57DC8700DCCE13 /* WorldTimeAPI.swift */,
+			);
+			path = entity;
+			sourceTree = "<group>";
+		};
+		7773558B2C57D6A500DCCE13 /* repo */ = {
+			isa = PBXGroup;
+			children = (
+				777355812C57D01500DCCE13 /* SunDaoRepository.swift */,
+			);
+			path = repo;
+			sourceTree = "<group>";
+		};
+		7773558C2C57D6BF00DCCE13 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				77B4C54C2C56C52D001A8076 /* HomePageVC.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		7773558D2C57D6C400DCCE13 /* viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				777355862C57D4A600DCCE13 /* HomePageVM.swift */,
+			);
+			path = viewmodels;
+			sourceTree = "<group>";
+		};
 		77B4C53C2C56C52D001A8076 = {
 			isa = PBXGroup;
 			children = (
@@ -64,9 +124,8 @@
 			children = (
 				77B4C5482C56C52D001A8076 /* AppDelegate.swift */,
 				77B4C54A2C56C52D001A8076 /* SceneDelegate.swift */,
-				77B4C54C2C56C52D001A8076 /* HomePage.swift */,
-				77B4C55C2C56C95F001A8076 /* SunInfoResponse.swift */,
-				77B4C55E2C56C977001A8076 /* SunResults.swift */,
+				777355892C57D69800DCCE13 /* ui */,
+				777355882C57D69100DCCE13 /* data */,
 				77B4C54E2C56C52D001A8076 /* Main.storyboard */,
 				77B4C5512C56C52E001A8076 /* Assets.xcassets */,
 				77B4C5532C56C52E001A8076 /* LaunchScreen.storyboard */,
@@ -93,6 +152,7 @@
 			name = SunInfo;
 			packageProductDependencies = (
 				77B4C5612C56CB70001A8076 /* Alamofire */,
+				777355842C57D05000DCCE13 /* RxSwift */,
 			);
 			productName = SunInfo;
 			productReference = 77B4C5452C56C52D001A8076 /* SunInfo.app */;
@@ -124,6 +184,7 @@
 			mainGroup = 77B4C53C2C56C52D001A8076;
 			packageReferences = (
 				77B4C5602C56CB70001A8076 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				777355832C57D05000DCCE13 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 77B4C5462C56C52D001A8076 /* Products */;
 			projectDirPath = "";
@@ -152,10 +213,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77B4C54D2C56C52D001A8076 /* HomePage.swift in Sources */,
+				77B4C54D2C56C52D001A8076 /* HomePageVC.swift in Sources */,
+				777355822C57D01500DCCE13 /* SunDaoRepository.swift in Sources */,
+				777355872C57D4A600DCCE13 /* HomePageVM.swift in Sources */,
 				77B4C55F2C56C977001A8076 /* SunResults.swift in Sources */,
 				77B4C55D2C56C95F001A8076 /* SunInfoResponse.swift in Sources */,
 				77B4C5492C56C52D001A8076 /* AppDelegate.swift in Sources */,
+				7773558F2C57DC8700DCCE13 /* WorldTimeAPI.swift in Sources */,
 				77B4C54B2C56C52D001A8076 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +445,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		777355832C57D05000DCCE13 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
 		77B4C5602C56CB70001A8076 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -392,6 +464,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		777355842C57D05000DCCE13 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 777355832C57D05000DCCE13 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
 		77B4C5612C56CB70001A8076 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 77B4C5602C56CB70001A8076 /* XCRemoteSwiftPackageReference "Alamofire" */;
