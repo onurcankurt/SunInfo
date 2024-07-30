@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77514BB52C5926B100C48DD6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77514BB42C5926B000C48DD6 /* CoreLocation.framework */; };
+		77514BB72C5926BF00C48DD6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77514BB62C5926BF00C48DD6 /* MapKit.framework */; };
 		777355822C57D01500DCCE13 /* SunDaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777355812C57D01500DCCE13 /* SunDaoRepository.swift */; };
 		777355852C57D05000DCCE13 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 777355842C57D05000DCCE13 /* RxSwift */; };
 		777355872C57D4A600DCCE13 /* HomePageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777355862C57D4A600DCCE13 /* HomePageVM.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77514BB42C5926B000C48DD6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		77514BB62C5926BF00C48DD6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		777355812C57D01500DCCE13 /* SunDaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunDaoRepository.swift; sourceTree = "<group>"; };
 		777355862C57D4A600DCCE13 /* HomePageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVM.swift; sourceTree = "<group>"; };
 		7773558E2C57DC8700DCCE13 /* WorldTimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeAPI.swift; sourceTree = "<group>"; };
@@ -43,7 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77514BB52C5926B100C48DD6 /* CoreLocation.framework in Frameworks */,
 				777355852C57D05000DCCE13 /* RxSwift in Frameworks */,
+				77514BB72C5926BF00C48DD6 /* MapKit.framework in Frameworks */,
 				77B4C5622C56CB70001A8076 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77514BB32C5926B000C48DD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77514BB62C5926BF00C48DD6 /* MapKit.framework */,
+				77514BB42C5926B000C48DD6 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		777355882C57D69100DCCE13 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +123,7 @@
 			children = (
 				77B4C5472C56C52D001A8076 /* SunInfo */,
 				77B4C5462C56C52D001A8076 /* Products */,
+				77514BB32C5926B000C48DD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

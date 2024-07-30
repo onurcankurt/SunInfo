@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,11 +26,11 @@
                                     <!--2037-12-31 11:00:00 +0000-->
                                 </date>
                             </datePicker>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4dB-be-LPp">
-                                <rect key="frame" x="75.333333333333329" y="211.33333333333337" width="242.66666666666669" height="126"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="4dB-be-LPp">
+                                <rect key="frame" x="67.666666666666657" y="197.33333333333337" width="257.66666666666674" height="160"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zi6-nV-2gV">
-                                        <rect key="frame" x="0.0" y="0.0" width="112.66666666666667" height="126"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="112.66666666666667" height="160"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun Rise:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nX7-qi-bc1">
                                                 <rect key="frame" x="0.0" y="0.0" width="112.66666666666667" height="24"/>
@@ -55,31 +56,43 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UTC:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7v-l6-YaF">
+                                                <rect key="frame" x="0.0" y="135.99999999999997" width="112.66666666666667" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3xz-uQ-3bX">
-                                        <rect key="frame" x="142.66666666666669" y="0.0" width="100" height="126"/>
+                                        <rect key="frame" x="157.66666666666669" y="0.0" width="100" height="160"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun Rise:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOb-cu-y4h">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun Rise:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOb-cu-y4h">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun Set:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yg2-Yi-GDc">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun Set:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yg2-Yi-GDc">
                                                 <rect key="frame" x="0.0" y="34" width="100" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solar Noon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flv-Qv-xP2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solar Noon" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flv-Qv-xP2">
                                                 <rect key="frame" x="0.0" y="67.999999999999972" width="100" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INB-mT-TNG">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day Length" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INB-mT-TNG">
                                                 <rect key="frame" x="0.0" y="101.99999999999997" width="100" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqB-WN-pvT">
+                                                <rect key="frame" x="0.0" y="135.99999999999997" width="100" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -89,7 +102,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9LN-aN-Df3">
-                                <rect key="frame" x="154.33333333333334" y="373.66666666666669" width="84.333333333333343" height="34.333333333333314"/>
+                                <rect key="frame" x="162" y="736" width="84.333333333333314" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Get Info"/>
                                 <connections>
@@ -102,18 +115,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uuU-IT-7lp">
+                                <rect key="frame" x="47" y="362" width="298" height="305"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="305" id="DSw-gb-Mdy"/>
+                                </constraints>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9LN-aN-Df3" firstAttribute="top" secondItem="4dB-be-LPp" secondAttribute="bottom" constant="36.329999999999998" id="FGu-gV-JVH"/>
+                            <constraint firstItem="9LN-aN-Df3" firstAttribute="top" secondItem="uuU-IT-7lp" secondAttribute="bottom" constant="49" id="MPE-yV-bbV"/>
+                            <constraint firstItem="9LN-aN-Df3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="162" id="OmJ-ZP-wzR"/>
+                            <constraint firstItem="uuU-IT-7lp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="Orh-yr-XzS"/>
                             <constraint firstItem="4dB-be-LPp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WSq-ao-8oE"/>
                             <constraint firstItem="HSA-xc-cnY" firstAttribute="centerY" secondItem="pnv-Fm-juf" secondAttribute="centerY" id="ZMw-zP-yvK"/>
                             <constraint firstItem="HSA-xc-cnY" firstAttribute="leading" secondItem="pnv-Fm-juf" secondAttribute="trailing" constant="76.666666666666657" id="ady-14-0iN"/>
-                            <constraint firstItem="9LN-aN-Df3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHt-sp-FKd"/>
+                            <constraint firstItem="uuU-IT-7lp" firstAttribute="centerX" secondItem="4dB-be-LPp" secondAttribute="centerX" id="gwl-V6-Xw2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HSA-xc-cnY" secondAttribute="trailing" constant="57" id="onP-vf-5k1"/>
                             <constraint firstItem="pnv-Fm-juf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="paW-Lm-Tgi"/>
-                            <constraint firstItem="4dB-be-LPp" firstAttribute="top" secondItem="HSA-xc-cnY" secondAttribute="bottom" constant="74.000000000000028" id="pet-PV-kQP"/>
+                            <constraint firstItem="4dB-be-LPp" firstAttribute="top" secondItem="HSA-xc-cnY" secondAttribute="bottom" constant="60" id="pet-PV-kQP"/>
+                            <constraint firstItem="uuU-IT-7lp" firstAttribute="top" secondItem="4dB-be-LPp" secondAttribute="bottom" constant="24.666666666666629" id="pjF-Je-oTy"/>
                             <constraint firstItem="pnv-Fm-juf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="s0n-4i-iMo"/>
                             <constraint firstItem="HSA-xc-cnY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tfs-Pn-xod"/>
                         </constraints>
@@ -122,9 +145,11 @@
                     <connections>
                         <outlet property="datePicker" destination="HSA-xc-cnY" id="ggm-vY-why"/>
                         <outlet property="dayLengthLabel" destination="INB-mT-TNG" id="m7Z-za-PcL"/>
+                        <outlet property="mapView" destination="uuU-IT-7lp" id="vDv-4N-Upa"/>
                         <outlet property="solarNoonLabel" destination="Flv-Qv-xP2" id="Cjn-wy-E7x"/>
                         <outlet property="sunRiseLabel" destination="pOb-cu-y4h" id="7wv-uZ-yZ4"/>
                         <outlet property="sunSetLabel" destination="Yg2-Yi-GDc" id="8ai-63-Mwn"/>
+                        <outlet property="utcLabel" destination="hqB-WN-pvT" id="DqC-oN-H5V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

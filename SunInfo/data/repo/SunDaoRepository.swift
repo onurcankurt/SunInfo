@@ -41,7 +41,7 @@ class SunDaoRepository {
         }
     }
     
-    func adjustClockTime(userUTC: String, clock: String) -> String{
+    func adjustClockTime(userUTC: Int, clock: String) -> String{
         // Saati UTC 0 formatında parse etmek için bir DateFormatter
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "h:mm:ss a"
@@ -49,9 +49,9 @@ class SunDaoRepository {
         if let date = timeFormatter.date(from: clock) {
             // Kullanıcının UTC offset'ini DateComponents'a dönüştürme
             var offsetComponents = DateComponents()
-            let sign = userUTC.first!
-            let hoursOffset = Int(userUTC.dropFirst())!
-            offsetComponents.hour = (sign == "+" ? hoursOffset : -hoursOffset)
+            //let sign = userUTC.first!
+            //let hoursOffset = Int(userUTC.dropFirst())!
+            offsetComponents.hour = userUTC
             
             // Calendar kullanarak tarihi güncelleme
             if let adjustedDate = Calendar.current.date(byAdding: offsetComponents, to: date) {
@@ -60,7 +60,7 @@ class SunDaoRepository {
                 outputFormatter.dateFormat = "h:mm:ss a"
                 //outputFormatter.timeZone = TimeZone.current
                 let localTimeString = outputFormatter.string(from: adjustedDate)
-                print("Adjusted Time: \(localTimeString)")
+                //print("Adjusted Time: \(localTimeString)")
                 return localTimeString
             }
         }

@@ -26,7 +26,7 @@ class HomePageVM {
         srepo.getClientInfo()
     }
     
-    func adjustClockTime(userUTC: String, clock: String) -> String{
+    func adjustClockTime(userUTC: Int, clock: String) -> String{
         srepo.adjustClockTime(userUTC: userUTC, clock: clock)
     }
 }
