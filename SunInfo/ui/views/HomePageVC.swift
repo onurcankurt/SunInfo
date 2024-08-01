@@ -56,48 +56,38 @@ class HomePageVC: UIViewController{
             self.clientInfo = clientInfoRx
         })
         
-        viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
-        viewModel.getClientInfo()
-        
-        //print(clientInfo?.abbreviation)
-        //print(DateFormatter().timeZone.secondsFromGMT())
-        
-        sunRiseLabel.text = sunInfo?.sunrise
-        sunSetLabel.text = sunInfo?.sunset
-        solarNoonLabel.text = sunInfo?.solar_noon
-        dayLengthLabel.text = sunInfo?.day_length
+        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
         // Haritaya dokunma işlemi ekle
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         mapView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Tarih formatını belirle
+        let selectedDate = dateFormatter.string(from: sender.date)
+        print("Selected Date: \(selectedDate)")
+        
+        // Seçilen tarih ile yapılacak diğer işlemler
+        // örneğin, bir değişkeni güncelleme veya başka bir fonksiyon çağırma
+        self.viewModel.getSunInfo(lat: latitude, lng: longitude, date: selectedDate)
+    }
+    
     
     @IBAction func getInfoButton(_ sender: UIDatePicker) {
-        getTimeZone(for: CLLocation(latitude: latitude, longitude: longitude)) { offset in
-            self.utc = offset
-        }
-        theDate = dateFormatter.string(from: datePicker.date)
-        //print(theDate)
-        //print("Latitude: \(latitude), Longitude: \(longitude)")
-        viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
-        //        if let s = sunInfo {
-        //            sunRiseLabel.text = s.sunrise
-        //            sunSetLabel.text = s.sunset
-        //            solarNoonLabel.text = s.solar_noon
-        //            dayLengthLabel.text = s.day_length
-        //        }
-        //print(utc)
-        if let s = sunInfo {
-            sunRiseLabel.text = viewModel.adjustClockTime(userUTC: utc, clock: s.sunrise!)
-            sunSetLabel.text = viewModel.adjustClockTime(userUTC: utc, clock: s.sunset!)
-            solarNoonLabel.text = viewModel.adjustClockTime(userUTC: utc, clock: s.solar_noon!)
-            dayLengthLabel.text = s.day_length
-            let sign = (self.utc >= 0 ? "+" : "")
-            utcLabel.text = "\(sign)\(self.utc)"
-        }
-        
-        //getTimeZone(for: CLLocation(latitude: latitude, longitude: longitude))
+            self.getTimeZone(for: CLLocation(latitude: self.latitude, longitude: self.longitude)) { offset in
+                self.utc = offset
+            }
+            self.theDate = self.dateFormatter.string(from: self.datePicker.date)
+            if let s = self.sunInfo {
+                self.sunRiseLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.sunrise!)
+                self.sunSetLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.sunset!)
+                self.solarNoonLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.solar_noon!)
+                self.dayLengthLabel.text = s.day_length
+                let sign = (self.utc >= 0 ? "+" : "")
+                self.utcLabel.text = "\(sign)\(self.utc)"
+            }
     }
     
     func getTimeZone(for location: CLLocation, completion: @escaping (Int) -> Void) {
@@ -133,6 +123,7 @@ class HomePageVC: UIViewController{
         longitude = locationForTimezone.coordinate.longitude
         getTimeZone(for: locationForTimezone) { utc in
         }
+        viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
     }
 }
 

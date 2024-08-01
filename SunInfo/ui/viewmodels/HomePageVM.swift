@@ -16,6 +16,7 @@ class HomePageVM {
     init() {
         sunInfoRx = srepo.sunInfoRx
         clientInfoRx = srepo.clientInfoRx
+        getClientInfo()
     }
     
     func getSunInfo(lat: Double, lng: Double, date: String) {
