@@ -8,10 +8,19 @@
 import Foundation
 import RxSwift
 import Alamofire
+import CoreLocation
 
 class SunDaoRepository {
     var sunInfoRx = BehaviorSubject(value: SunResults())
     var clientInfoRx = BehaviorSubject(value: WorldTimeAPI())
+    
+    var theDate: String = ""
+    var latitude: Double = 0
+    var longitude: Double = 0
+    let dateFormatter = DateFormatter()
+    var utc = 0
+    
+    var cityDataRx = BehaviorSubject(value: [String]())
     
     func getSunInfo(lat: Double, lng: Double, date: String) {
         let url = "https://api.sunrise-sunset.org/json?lat=\(lat)&lng=\(lng)&date=\(date)"
@@ -45,7 +54,7 @@ class SunDaoRepository {
         // Saati UTC 0 formatında parse etmek için bir DateFormatter
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "h:mm:ss a"
-
+        
         if let date = timeFormatter.date(from: clock) {
             // Kullanıcının UTC offset'ini DateComponents'a dönüştürme
             var offsetComponents = DateComponents()
@@ -65,5 +74,28 @@ class SunDaoRepository {
             }
         }
         return ""
+    }
+    
+    func reverseGeocode(location: CLLocation) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            var addressComponents: [String] = []
+            
+            if let error = error {
+                print("Failed to reverse geocode location: \(error.localizedDescription)")
+                return
+            }
+            
+            if let placemark = placemarks?.first {
+                if let administrativeArea = placemark.administrativeArea {
+                    addressComponents.append(administrativeArea)
+                }
+                
+                if let subAdministrativeArea = placemark.subAdministrativeArea {
+                    addressComponents.append(subAdministrativeArea)
+                }
+                self.cityDataRx.onNext(addressComponents)
+            }
+        }
     }
 }

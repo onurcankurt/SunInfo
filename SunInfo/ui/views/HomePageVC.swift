@@ -28,6 +28,8 @@ class HomePageVC: UIViewController{
     var sunInfo: SunResults?
     var clientInfo: WorldTimeAPI?
     
+    var cityData = [String]()
+    
     let locationManager = CLLocationManager()
     
     let viewModel = HomePageVM()
@@ -48,6 +50,9 @@ class HomePageVC: UIViewController{
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        latitude = (locationManager.location?.coordinate.latitude)!
+        longitude = (locationManager.location?.coordinate.longitude)!
+                
         _ = viewModel.sunInfoRx.subscribe(onNext: { sunResult in
             self.sunInfo = sunResult
         })
@@ -55,6 +60,15 @@ class HomePageVC: UIViewController{
         _ = viewModel.clientInfoRx.subscribe(onNext: { clientInfoRx in
             self.clientInfo = clientInfoRx
         })
+        
+        _ = viewModel.cityDataRx.subscribe(onNext: { cityDataRx in
+            self.cityData = cityDataRx
+            self.addPin()
+        })
+        
+        viewModel.getClientInfo()
+        viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
+        viewModel.reverseGeocode(location: CLLocation(latitude: latitude, longitude: longitude))
         
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
@@ -111,11 +125,10 @@ class HomePageVC: UIViewController{
     }
     
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        mapView.removeAnnotations(mapView.annotations)
+        
         let location = gestureRecognizer.location(in: mapView)
         let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
-        
-        // Dokunulan koordinatları ekrana yazdır
-        //print("Latitude: \(coordinate.latitude), Longitude: \(coordinate.longitude)")
         
         // Saat dilimini belirleme
         let locationForTimezone = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -123,7 +136,20 @@ class HomePageVC: UIViewController{
         longitude = locationForTimezone.coordinate.longitude
         getTimeZone(for: locationForTimezone) { utc in
         }
+        
+        viewModel.reverseGeocode(location: locationForTimezone)
+        
         viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
+    }
+    
+    func addPin() {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        pin.title = self.cityData.first
+        pin.subtitle = self.cityData.last
+        
+        mapView.addAnnotation(pin)
     }
 }
 
@@ -133,7 +159,6 @@ extension HomePageVC: CLLocationManagerDelegate {
         if let location = locations.last {
             latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
-            //print("Latitude: \(latitude), Longitude: \(longitude)")
             
             // Konum güncellemeyi durdur
             //locationManager.stopUpdatingLocation()
