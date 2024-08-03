@@ -9,16 +9,11 @@ import Foundation
 import RxSwift
 import Alamofire
 import CoreLocation
+import MapKit
 
 class SunDaoRepository {
     var sunInfoRx = BehaviorSubject(value: SunResults())
     var clientInfoRx = BehaviorSubject(value: WorldTimeAPI())
-    
-    var theDate: String = ""
-    var latitude: Double = 0
-    var longitude: Double = 0
-    let dateFormatter = DateFormatter()
-    var utc = 0
     
     var cityDataRx = BehaviorSubject(value: [String]())
     
@@ -97,5 +92,65 @@ class SunDaoRepository {
                 self.cityDataRx.onNext(addressComponents)
             }
         }
+    }
+    
+    @objc func dateChanged(_ sender: UIDatePicker, latitude: Double, longitude: Double) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Tarih formatını belirle
+        let selectedDate = dateFormatter.string(from: sender.date)
+        print("Selected Date: \(selectedDate)")
+        
+        // Seçilen tarih ile yapılacak diğer işlemler
+        // örneğin, bir değişkeni güncelleme veya başka bir fonksiyon çağırma
+        getSunInfo(lat: latitude, lng: longitude, date: selectedDate)
+    }
+
+    
+    func getTimeZone(for location: CLLocation, completion: @escaping (Int) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let error = error {
+                print("Failed to reverse geocode location: \(error.localizedDescription)")
+                completion(0)
+            }
+            
+            if let placemark = placemarks?.first, let timeZone = placemark.timeZone {
+                let offset = timeZone.secondsFromGMT() / 3600
+                completion(offset) // Return offset
+            } else {
+                print("Failed to get time zone from placemark.")
+                completion(0) // return 0
+            }
+        }
+    }
+    
+
+    func addPin(latitude: Double, longitude: Double, province: String, district: String, map: MKMapView) {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        pin.title = province
+        pin.subtitle = district
+        
+        map.addAnnotation(pin)
+    }
+    
+    
+    func handleTap(gestureRecognizer: UITapGestureRecognizer, mapView: MKMapView, latitude: Double, longitude: Double,  theDate: String) -> [Double] {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        let location = gestureRecognizer.location(in: mapView)
+        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+        
+        //Set the time zone
+        let locationForTimezone = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let lat = locationForTimezone.coordinate.latitude
+        let lng = locationForTimezone.coordinate.longitude
+        getTimeZone(for: locationForTimezone) { utc in}
+        
+        reverseGeocode(location: locationForTimezone)
+        print("\(lat) \(lng)")
+        getSunInfo(lat: lat, lng: lng, date: theDate)
+        return [lat, lng]
     }
 }

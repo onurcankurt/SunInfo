@@ -38,15 +38,14 @@ class HomePageVC: UIViewController{
         super.viewDidLoad()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         theDate = dateFormatter.string(from: datePicker.date)
-        //print("viewdidload  \(theDate) ")
         
         mapView.delegate = self
         
-        // Konum yöneticisini başlat
+        //Starting location manager
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        // Kullanıcıdan konum izni isteme
+        //Authorization for location
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
@@ -57,40 +56,38 @@ class HomePageVC: UIViewController{
             self.sunInfo = sunResult
         })
         
+        
         _ = viewModel.clientInfoRx.subscribe(onNext: { clientInfoRx in
             self.clientInfo = clientInfoRx
         })
         
         _ = viewModel.cityDataRx.subscribe(onNext: { cityDataRx in
             self.cityData = cityDataRx
-            self.addPin()
+            self.viewModel.addPin(latitude: self.latitude, longitude: self.longitude, province: self.cityData.first ?? "" , district: self.cityData.last ?? "", map: self.mapView)
         })
         
         viewModel.getClientInfo()
         viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
         viewModel.reverseGeocode(location: CLLocation(latitude: latitude, longitude: longitude))
         
+        
+        self.theDate = self.dateFormatter.string(from: self.datePicker.date)
+        
+        
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
-        // Haritaya dokunma işlemi ekle
+        //Add gesture recognizer to mapview
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         mapView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd" // Tarih formatını belirle
-        let selectedDate = dateFormatter.string(from: sender.date)
-        print("Selected Date: \(selectedDate)")
-        
-        // Seçilen tarih ile yapılacak diğer işlemler
-        // örneğin, bir değişkeni güncelleme veya başka bir fonksiyon çağırma
-        self.viewModel.getSunInfo(lat: latitude, lng: longitude, date: selectedDate)
+        self.viewModel.dateChanged(sender, latitude: latitude, longitude: longitude)
     }
     
     
     @IBAction func getInfoButton(_ sender: UIDatePicker) {
-            self.getTimeZone(for: CLLocation(latitude: self.latitude, longitude: self.longitude)) { offset in
+        viewModel.getTimeZone(for: CLLocation(latitude: self.latitude, longitude: self.longitude)) { offset in
                 self.utc = offset
             }
             self.theDate = self.dateFormatter.string(from: self.datePicker.date)
@@ -104,52 +101,10 @@ class HomePageVC: UIViewController{
             }
     }
     
-    func getTimeZone(for location: CLLocation, completion: @escaping (Int) -> Void) {
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            if let error = error {
-                print("Failed to reverse geocode location: \(error.localizedDescription)")
-                completion(0)
-            }
-            
-            if let placemark = placemarks?.first, let timeZone = placemark.timeZone {
-                let offset = timeZone.secondsFromGMT() / 3600
-                self.utc = offset
-                //print("Time Zone from Location: \(timeZone.identifier)")
-                completion(offset) // Başarı durumunda offset döndür
-            } else {
-                print("Failed to get time zone from placemark.")
-                completion(0) // Başarısız durumda 0 döndür
-            }
-        }
-    }
-    
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        mapView.removeAnnotations(mapView.annotations)
-        
-        let location = gestureRecognizer.location(in: mapView)
-        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
-        
-        // Saat dilimini belirleme
-        let locationForTimezone = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        latitude = locationForTimezone.coordinate.latitude
-        longitude = locationForTimezone.coordinate.longitude
-        getTimeZone(for: locationForTimezone) { utc in
-        }
-        
-        viewModel.reverseGeocode(location: locationForTimezone)
-        
-        viewModel.getSunInfo(lat: latitude, lng: longitude, date: theDate)
-    }
-    
-    func addPin() {
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let pin = MKPointAnnotation()
-        pin.coordinate = coordinate
-        pin.title = self.cityData.first
-        pin.subtitle = self.cityData.last
-        
-        mapView.addAnnotation(pin)
+        let coords = viewModel.handleTap(gestureRecognizer: gestureRecognizer, mapView: mapView, latitude: latitude, longitude: longitude, theDate: theDate)
+        latitude = coords.first ?? 0
+        longitude = coords.last ?? 0
     }
 }
 
@@ -160,7 +115,7 @@ extension HomePageVC: CLLocationManagerDelegate {
             latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
             
-            // Konum güncellemeyi durdur
+            // Stop update location
             //locationManager.stopUpdatingLocation()
         }
     }
