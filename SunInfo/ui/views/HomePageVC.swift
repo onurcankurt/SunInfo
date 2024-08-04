@@ -36,6 +36,9 @@ class HomePageVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupGradientLayer()
+        
         dateFormatter.dateFormat = "yyyy-MM-dd"
         theDate = dateFormatter.string(from: datePicker.date)
         
@@ -51,7 +54,7 @@ class HomePageVC: UIViewController{
         
         latitude = (locationManager.location?.coordinate.latitude)!
         longitude = (locationManager.location?.coordinate.longitude)!
-                
+        
         _ = viewModel.sunInfoRx.subscribe(onNext: { sunResult in
             self.sunInfo = sunResult
         })
@@ -64,6 +67,9 @@ class HomePageVC: UIViewController{
         _ = viewModel.cityDataRx.subscribe(onNext: { cityDataRx in
             self.cityData = cityDataRx
             self.viewModel.addPin(latitude: self.latitude, longitude: self.longitude, province: self.cityData.first ?? "" , district: self.cityData.last ?? "", map: self.mapView)
+            self.viewModel.getTimeZone(for: CLLocation(latitude: self.latitude, longitude: self.longitude)) { offset in
+                self.utc = offset
+            }
         })
         
         viewModel.getClientInfo()
@@ -88,23 +94,38 @@ class HomePageVC: UIViewController{
     
     @IBAction func getInfoButton(_ sender: UIDatePicker) {
         viewModel.getTimeZone(for: CLLocation(latitude: self.latitude, longitude: self.longitude)) { offset in
-                self.utc = offset
-            }
-            self.theDate = self.dateFormatter.string(from: self.datePicker.date)
-            if let s = self.sunInfo {
-                self.sunRiseLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.sunrise!)
-                self.sunSetLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.sunset!)
-                self.solarNoonLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.solar_noon!)
-                self.dayLengthLabel.text = s.day_length
-                let sign = (self.utc >= 0 ? "+" : "")
-                self.utcLabel.text = "\(sign)\(self.utc)"
-            }
+            self.utc = offset
+        }
+        self.theDate = self.dateFormatter.string(from: self.datePicker.date)
+        if let s = self.sunInfo {
+            self.sunRiseLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.sunrise!)
+            self.sunSetLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.sunset!)
+            self.solarNoonLabel.text = self.viewModel.adjustClockTime(userUTC: self.utc, clock: s.solar_noon!)
+            self.dayLengthLabel.text = s.day_length
+            let sign = (self.utc >= 0 ? "+" : "")
+            self.utcLabel.text = "UTC \(sign)\(self.utc)"
+        }
     }
     
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         let coords = viewModel.handleTap(gestureRecognizer: gestureRecognizer, mapView: mapView, latitude: latitude, longitude: longitude, theDate: theDate)
         latitude = coords.first ?? 0
         longitude = coords.last ?? 0
+    }
+    
+    func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [UIColor.bottom.cgColor, UIColor.top.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        
+        // Add the gradient layer to the view's layer at index 0
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        registerForTraitChanges([UITraitUserInterfaceStyle.self], handler: { (self: Self, previousTraitCollection: UITraitCollection) in
+            gradientLayer.colors = [UIColor.bottom.cgColor, UIColor.top.cgColor]
+        })
     }
 }
 
